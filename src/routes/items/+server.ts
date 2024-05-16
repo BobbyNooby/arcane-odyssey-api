@@ -17,10 +17,9 @@ export async function GET() {
 
 		console.log(data);
 		return json(data, {
-			headers: corsHeaders,
 			status: 200
 		});
 	} catch (error) {
-		return json({ error: 'Internal Server Error' }, { status: 500, headers: corsHeaders });
+		return json({ error: 'Internal Server Error' }, { status: 500 });
 	}
 }
