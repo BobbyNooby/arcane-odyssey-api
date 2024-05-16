@@ -1,6 +1,6 @@
 export const load = async (): Promise<{ data: any[] } | { error: string }> => {
 	try {
-		const response = await fetch('http://api.arcaneodyssey.net/items');
+		const response = await fetch('https://api.arcaneodyssey.net/items');
 		const data = await response.json();
 
 		if (response.status !== 200) {
