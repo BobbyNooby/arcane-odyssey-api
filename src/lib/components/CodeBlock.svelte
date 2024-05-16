@@ -16,6 +16,16 @@
 	}
 </script>
 
-<div class="rounded border-white border max-w-full flex">
-	<pre><code class="language-{language}">{code}</code></pre>
+<div class="rounded border-white border max-w-full">
+	<pre class="pre-container"><code class="language-{language}">{code}</code></pre>
 </div>
+
+<!-- <div class="rounded border-white border max-w-full flex">
+	<pre><code class="language-{language}">{code}</code></pre>
+</div> -->
+<style>
+	.pre-container {
+		padding: 1em;
+		white-space: pre-wrap; /* Preserve formatting and wrap long lines */
+	}
+</style>
