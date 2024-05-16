@@ -11,18 +11,9 @@
 
 	onMount(() => {
 		ready = true;
+		console.log(data.data);
 	});
 
-	async function getDataFromAPI() {
-		try {
-			const response = await fetch('https://api.arcaneodyssey.net/items');
-			const json = await response.json();
-			return json;
-		} catch (error) {
-			console.error(error);
-			return null;
-		}
-	}
 	function saveToJsonFile() {
 		const now = new Date();
 		const fileName = `AOToolsItems_${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}_${now.getHours()}-${String(now.getMinutes()).padStart(2, '0')}-${String(now.getSeconds()).padStart(2, '0')}.json`;
@@ -51,17 +42,26 @@
 			enchants, modifiers, cannons, deckhands, hull armors, quartermsters, rams, sail materials,
 			ship crews, ships, and siege weapons.
 		</p>
-		<p class="text-white text-2xl mt-10">
+		<p class="text-white text-2xl my-5 w-1/2">
 			This API endpoint only accepts GET HTTP requests. Upon receiving a GET request, the API will
 			return the JSON for all the items in the database.
+		</p>
+		<p class="text-white text-2xl my-5 w-1/2">
+			If you would like to save the data to a JSON file, click the button below.
 		</p>
 		<BlackButton parentText="Save To JSON File" parentFunction={() => saveToJsonFile()}
 		></BlackButton>
 
+		<p class="text-white text-2xl mt-10">
+			If you would like to implement the data in your website, shown below is are examples of what
+			the code / response should look like.
+		</p>
+
+		<p class="text-white text-2xl mt-10">Sample Code (JavaScript)</p>
 		<CodeBlock
 			code={`async function getDataFromAPI() {
 				try {
-					const response = await fetch('https://api.arcaneodyssey.net/items');
+					const response = await fetch('https://api.arcaneodyssey.net/items', { method: 'GET' });
 					const json = await response.json();
 					return json;
 				} catch (error) {
@@ -70,15 +70,18 @@
 				}
 			}`}
 			language={'javascript'}
+			tailwindcss="text-md"
+			isOverflow={false}
 		></CodeBlock>
 
-		<CodeBlock code={JSON.stringify(data.data, null, 2)} language={'json'}></CodeBlock>
+		<p class="text-white text-2xl">Sample Response</p>
 
-		<div>
-			<pre><code class="language-" lang="json">
-		{JSON.stringify(data.data, null, 2)}
-		</code>
-		</pre>
-		</div>
+		<CodeBlock
+			code={JSON.stringify(data.data, null, 2)}
+			language={'json'}
+			tailwindcss="text-xs w-2/3 mx-5"
+			isOverflow={true}
+		></CodeBlock>
+		<div class=" mb-36"></div>
 	</div>
 {/if}

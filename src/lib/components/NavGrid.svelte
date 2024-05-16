@@ -1,8 +1,7 @@
 <script lang="ts">
 	import { fly, fade } from 'svelte/transition';
-	import { page } from '$app/stores';
-	import { base } from '$app/paths';
-
+	import { navigating, page } from '$app/stores';
+	import { goto } from '$app/navigation';
 	export let showHome: boolean, showText: boolean;
 
 	const navLinks = {
@@ -25,53 +24,74 @@
 			descText: 'Extra Info'
 		}
 	};
+
+	function navigateToUrl(url: string) {
+		goto(url);
+	}
 </script>
 
-<div>
-	<div
-		class="flex flex-row p-4 z-50"
-		in:fly={{ y: 20, duration: 300 }}
-		out:fade={{ delay: 250, duration: 300 }}
-	>
-		{#each Object.keys(navLinks) as navKey}
-			{#if showHome && navKey == 'home'}<a
-					href="{base}{navLinks[navKey].route}"
-					aria-current={$page.url.pathname === navLinks[navKey].route}
-					class="flex items-center justify-center"
-				>
-					<button
-						class="border border-slate-300 bg-gray-900 hover:bg-gray-800 fill-slate-300 px-2 py-2 rounded-lg flex flex-col items-center justify-center"
-						><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-							>{@html `${navLinks[navKey].svgPath}`}</svg
-						>
-						{#if showText}
-							<p class="px-2 text-slate-300 text-xl font-bold" style="text-decoration: none;">
-								{navLinks[navKey].descText}
-							</p>
-						{/if}
-					</button>
-				</a>{:else if navKey != 'home'}
-				<a
-					href="{base}{navLinks[navKey].route}"
-					aria-current={$page.url.pathname === navLinks[navKey].route}
-					class="flex items-center justify-center"
-				>
-					<button
-						class="border border-slate-300 bg-gray-900 hover:bg-gray-800 fill-slate-300 px-2 py-2 rounded-lg flex flex-col items-center justify-center"
-						><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-							>{@html `${navLinks[navKey].svgPath}`}</svg
-						>
-						{#if showText}
-							<p class="px-2 text-slate-300 text-xl font-bold" style="text-decoration: none;">
-								{navLinks[navKey].descText}
-							</p>
-						{/if}
-					</button>
-				</a>
-			{/if}
-		{/each}
+{#if !$navigating}
+	<div>
+		<div
+			class="flex flex-row p-4 z-50"
+			in:fly={{ y: 20, duration: 300 }}
+			out:fade={{ duration: 100 }}
+		>
+			{#each Object.keys(navLinks) as navKey}
+				<!-- svelte-ignore a11y-missing-attribute -->
+				{#if showHome && navKey == 'home'}<a
+						aria-current={$page.url.pathname === navLinks[navKey].route}
+						class="flex items-center justify-center"
+					>
+						<button
+							on:click={() => {
+								const currentRoute = location.pathname;
+								console.log(location.pathname);
+								const navLinkRoute = navLinks[navKey].route;
+								if (currentRoute !== navLinkRoute) {
+									navigateToUrl(navLinks[navKey].route);
+								}
+							}}
+							class="border border-slate-300 bg-gray-900 hover:bg-gray-800 fill-slate-300 px-2 py-2 rounded-lg flex flex-col items-center justify-center"
+							><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+								>{@html `${navLinks[navKey].svgPath}`}</svg
+							>
+							{#if showText}
+								<p class="px-2 text-slate-300 text-xl font-bold" style="text-decoration: none;">
+									{navLinks[navKey].descText}
+								</p>
+							{/if}
+						</button>
+					</a>{:else if navKey != 'home'}
+					<a
+						aria-current={$page.url.pathname === navLinks[navKey].route}
+						class="flex items-center justify-center"
+					>
+						<button
+							on:click={() => {
+								const currentRoute = location.pathname;
+								console.log(location.pathname);
+								const navLinkRoute = navLinks[navKey].route;
+								if (currentRoute !== navLinkRoute) {
+									navigateToUrl(navLinks[navKey].route);
+								}
+							}}
+							class="border border-slate-300 bg-gray-900 hover:bg-gray-800 fill-slate-300 px-2 py-2 rounded-lg flex flex-col items-center justify-center"
+							><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+								>{@html `${navLinks[navKey].svgPath}`}</svg
+							>
+							{#if showText}
+								<p class="px-2 text-slate-300 text-xl font-bold" style="text-decoration: none;">
+									{navLinks[navKey].descText}
+								</p>
+							{/if}
+						</button>
+					</a>
+				{/if}
+			{/each}
+		</div>
 	</div>
-</div>
+{/if}
 
 <style>
 	svg {

@@ -3,8 +3,7 @@
 	import 'prismjs/themes/prism-okaidia.css'; // Import Prism.js CSS theme
 	import { onMount } from 'svelte';
 
-	export let code;
-	export let language;
+	export let code, language, tailwindcss, isOverflow: boolean;
 
 	onMount(() => {
 		Prism.highlightAll();
@@ -16,7 +15,12 @@
 	}
 </script>
 
-<div class="rounded border-white border max-w-full">
+<div
+	class="rounded border-white border-2 w-auto max-w-full my-5 {tailwindcss} {isOverflow
+		? 'overflow-auto'
+		: ''}"
+	style={isOverflow ? ' max-height: 700px' : ''}
+>
 	<pre class="pre-container"><code class="language-{language}">{code}</code></pre>
 </div>
 
