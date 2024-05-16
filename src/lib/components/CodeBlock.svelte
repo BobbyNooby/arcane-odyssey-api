@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Prism from 'prismjs/prism.js'; // Import Prism.js
+	import Prism from 'prismjs'; // Import Prism.js
 	import 'prismjs/themes/prism-okaidia.css'; // Import Prism.js CSS theme
 	import { onMount } from 'svelte';
 
