@@ -11,25 +11,18 @@
 
 	onMount(() => {
 		ready = true;
-		const testData = getDataFromAPI();
-		console.log(testData);
 	});
 
 	async function getDataFromAPI() {
 		try {
 			const response = await fetch('https://api.arcaneodyssey.net/items');
-			if (!response.ok) {
-				throw new Error(`${response.status}: ${response.statusText}`);
-			}
 			const json = await response.json();
-			console.log(json);
 			return json;
 		} catch (error) {
 			console.error(error);
-			return { error: 'Internal Server Error' };
+			return null;
 		}
 	}
-
 	function saveToJsonFile() {
 		const now = new Date();
 		const fileName = `AOToolsItems_${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}_${now.getHours()}-${String(now.getMinutes()).padStart(2, '0')}-${String(now.getSeconds()).padStart(2, '0')}.json`;
@@ -66,8 +59,15 @@
 		></BlackButton>
 
 		<CodeBlock
-			code={function randomTestFunction() {
-				console.log('hello');
+			code={async function getDataFromAPI() {
+				try {
+					const response = await fetch('https://api.arcaneodyssey.net/items');
+					const json = await response.json();
+					return json;
+				} catch (error) {
+					console.error(error);
+					return null;
+				}
 			}}
 			language={'javascript'}
 		></CodeBlock>
