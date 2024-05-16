@@ -1,26 +1,10 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import type { PageData } from '../$types';
 
-	interface Item {
-		id: number;
-		name: string;
-		description: string;
-	}
-
-	type DatabaseJSON = Array<any>;
-
-	let databaseJSON: DatabaseJSON;
-	onMount(() => {
-		getData();
-	});
-
-	async function getData() {
-		const response = await fetch('/items');
-		databaseJSON = (await response.json()) as DatabaseJSON;
-	}
+	export let data: PageData;
 </script>
 
 <pre><code class="json" lang="json">
-{JSON.stringify(databaseJSON, null, 2)}
+{JSON.stringify(data.data, null, 2)}
 </code>
 </pre>
