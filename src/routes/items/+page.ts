@@ -1,0 +1,1 @@
+const prerendered = false;

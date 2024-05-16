@@ -3,6 +3,7 @@
 	import type { PageData } from '../$types';
 	import { fly } from 'svelte/transition';
 	import BlackButton from '$lib/components/BlackButton.svelte';
+	import CodeBlock from '$lib/components/CodeBlock.svelte';
 
 	export let data: PageData;
 
@@ -10,7 +11,24 @@
 
 	onMount(() => {
 		ready = true;
+		const testData = getDataFromAPI();
+		console.log(testData);
 	});
+
+	async function getDataFromAPI() {
+		try {
+			const response = await fetch('https://api.arcaneodyssey.net/items');
+			if (!response.ok) {
+				throw new Error(`${response.status}: ${response.statusText}`);
+			}
+			const json = await response.json();
+			console.log(json);
+			return json;
+		} catch (error) {
+			console.error(error);
+			return { error: 'Internal Server Error' };
+		}
+	}
 
 	function saveToJsonFile() {
 		const now = new Date();
@@ -31,7 +49,7 @@
 {#if ready}
 	<div
 		in:fly={{ y: 20, duration: 1000 }}
-		class="text-center justify-center items-center flex flex-col"
+		class="text-center justify-center items-center flex flex-col w-full"
 	>
 		<h1 class="text-white text-6xl mt-32" style="font-family: Merriweather;">/items</h1>
 		<p class="text-white text-2xl mt-10 w-2/3">
@@ -41,13 +59,23 @@
 			ship crews, ships, and siege weapons.
 		</p>
 		<p class="text-white text-2xl mt-10">
-			To get started click on any of the buttons below to get started on any of the available API
-			endpoints or to navigate this website.
+			This API endpoint only accepts GET HTTP requests. Upon receiving a GET request, the API will
+			return the JSON for all the items in the database.
 		</p>
 		<BlackButton parentText="Save To JSON File" parentFunction={() => saveToJsonFile()}
 		></BlackButton>
+
+		<CodeBlock
+			code={function randomTestFunction() {
+				console.log('hello');
+			}}
+			language={'javascript'}
+		></CodeBlock>
+
+		<CodeBlock code={JSON.stringify(data.data, null, 2)} language={'json'}></CodeBlock>
+
 		<div>
-			<pre><code class="json text-white" lang="json">
+			<pre><code class="language-" lang="json">
 		{JSON.stringify(data.data, null, 2)}
 		</code>
 		</pre>

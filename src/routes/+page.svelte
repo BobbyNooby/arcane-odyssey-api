@@ -7,7 +7,20 @@
 
 	onMount(() => {
 		ready = true;
+
+		const testData = getDataFromAPI();
+		console.log(testData);
 	});
+
+	async function getDataFromAPI() {
+		try {
+			const response = await fetch('https://api.arcaneodyssey.net/items');
+			const json = await response.json();
+			return json;
+		} catch (error) {
+			console.error(error);
+		}
+	}
 </script>
 
 {#if ready}

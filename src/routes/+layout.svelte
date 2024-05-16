@@ -1,5 +1,29 @@
 <script>
 	import '../app.css';
+	import { isMobile } from '$lib/mobileStore';
+	import { onMount } from 'svelte';
+
+	function checkMobile() {
+		console.log(window.innerWidth);
+		if (window.innerWidth < 1072) {
+			$isMobile = true;
+			console.log($isMobile);
+		} else {
+			$isMobile = false;
+			console.log($isMobile);
+		}
+	}
+
+	//Test device width to check for mobile conditions in the html
+	onMount(() => {
+		// Make sure this only works in browser
+		if (typeof window !== 'undefined') {
+			checkMobile();
+			window.addEventListener('resize', () => {
+				checkMobile();
+			});
+		}
+	});
 </script>
 
 <svelte:head>

@@ -8,8 +8,26 @@ export async function GET() {
 			.find({}, { projection: { _id: 0 } })
 			.toArray();
 
-		return json(data, { status: 200 });
+		return {
+			body: data,
+			status: 200,
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*',
+				'Access-Control-Allow-Headers': 'Content-Type',
+				'Access-Control-Allow-Methods': 'GET'
+			}
+		};
 	} catch (error) {
-		return json({ error: 'Internal Server Error' }, { status: 500 });
+		return {
+			body: { error: 'Internal Server Error' },
+			status: 500,
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*',
+				'Access-Control-Allow-Headers': 'Content-Type',
+				'Access-Control-Allow-Methods': 'GET'
+			}
+		};
 	}
 }
