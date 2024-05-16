@@ -15,16 +15,12 @@ export async function GET() {
 			.find({}, { projection: { _id: 0 } })
 			.toArray();
 
-		return {
-			body: data,
-			status: 200,
-			headers: corsHeaders
-		};
+		console.log(data);
+		return json(data, {
+			headers: corsHeaders,
+			status: 200
+		});
 	} catch (error) {
-		return {
-			body: { error: 'Internal Server Error' },
-			status: 500,
-			headers: corsHeaders
-		};
+		return json({ error: 'Internal Server Error' }, { status: 500, headers: corsHeaders });
 	}
 }
