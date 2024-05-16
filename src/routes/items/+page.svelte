@@ -59,7 +59,7 @@
 		></BlackButton>
 
 		<CodeBlock
-			code={async function getDataFromAPI() {
+			code={`async function getDataFromAPI() {
 				try {
 					const response = await fetch('https://api.arcaneodyssey.net/items');
 					const json = await response.json();
@@ -68,7 +68,7 @@
 					console.error(error);
 					return null;
 				}
-			}}
+			}`}
 			language={'javascript'}
 		></CodeBlock>
 
