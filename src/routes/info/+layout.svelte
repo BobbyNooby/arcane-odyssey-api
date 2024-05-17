@@ -10,7 +10,7 @@
 
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://api.arcaneodyssey.net/" />
+	<meta property="og:url" content="https://api.arcaneodyssey.net/info" />
 	<meta property="og:title" content="Arcane Odyssey API" />
 	<meta property="og:description" content="Unofficial Items API for Arcane Odyssey." />
 	<meta
@@ -20,7 +20,7 @@
 
 	<!-- Twitter -->
 	<meta property="twitter:card" content="summary_large_image" />
-	<meta property="twitter:url" content="https://api.arcaneodyssey.net/" />
+	<meta property="twitter:url" content="https://api.arcaneodyssey.net/info" />
 	<meta property="twitter:title" content="Arcane Odyssey API" />
 	<meta property="twitter:description" content="Unofficial Items API for Arcane Odyssey." />
 	<meta
