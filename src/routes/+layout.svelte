@@ -42,14 +42,17 @@
 
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://metatags.io/" />
+	<meta property="og:url" content="https://api.arcaneodyssey.net/" />
 	<meta property="og:title" content="Arcane Odyssey API" />
 	<meta property="og:description" content="Unofficial Items API for Arcane Odyssey." />
-	<meta property="og:image" content="https://metatags.io/images/meta-tags.png" />
+	<meta
+		property="og:image"
+		content="https://raw.githubusercontent.com/BobbyNooby/AOGearBuilderImages/main/favicon.png"
+	/>
 
 	<!-- Twitter -->
 	<meta property="twitter:card" content="summary_large_image" />
-	<meta property="twitter:url" content="https://metatags.io/" />
+	<meta property="twitter:url" content="https://api.arcaneodyssey.net/" />
 	<meta property="twitter:title" content="Arcane Odyssey API" />
 	<meta property="twitter:description" content="Unofficial Items API for Arcane Odyssey." />
 	<meta
