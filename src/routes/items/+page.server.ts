@@ -1,4 +1,6 @@
-export const load = async (): Promise<{ data: any[] } | { error: string }> => {
+export const load = async (): Promise<
+	{ randomData: any[]; allData: any[] } | { error: string }
+> => {
 	try {
 		const response = await fetch('https://api.arcaneodyssey.net/items', { method: 'GET' });
 		const data = await response.json();
@@ -35,7 +37,7 @@ export const load = async (): Promise<{ data: any[] } | { error: string }> => {
 			}
 		}
 
-		return { data: finalData };
+		return { randomData: finalData, allData: data };
 	} catch (error) {
 		console.log(error);
 		return { error: 'Internal Server Error' };

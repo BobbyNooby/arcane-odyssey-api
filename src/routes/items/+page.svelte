@@ -11,13 +11,13 @@
 
 	onMount(() => {
 		ready = true;
-		console.log(data.data);
+		console.log(data.allData);
 	});
 
 	function saveToJsonFile() {
 		const now = new Date();
 		const fileName = `AOToolsItems_${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}_${now.getHours()}-${String(now.getMinutes()).padStart(2, '0')}-${String(now.getSeconds()).padStart(2, '0')}.json`;
-		const json = data.data;
+		const json = data.allData;
 		const blob = new Blob([JSON.stringify(json, null, 2)], { type: 'application/json' });
 		const url = URL.createObjectURL(blob);
 		const a = document.createElement('a');
@@ -38,7 +38,7 @@
 		<h1 class="text-white text-6xl mt-32" style="font-family: Merriweather;">/items</h1>
 		<p class="text-white text-2xl mt-10 w-2/3">
 			This endpoint returns a single json collection with data for all the items used in Arcane
-			Odyssey Tools. Currently, the data includes data for accessories, chestpaltes, pants, gems,
+			Odyssey Tools. Currently, the data includes data for accessories, chestplates, pants, gems,
 			enchants, modifiers, cannons, deckhands, hull armors, quartermsters, rams, sail materials,
 			ship crews, ships, and siege weapons.
 		</p>
@@ -47,9 +47,9 @@
 			return the JSON for all the items in the database.
 		</p>
 		<p class="text-white text-2xl my-5 w-1/2">
-			If you would like to save the data to a JSON file, click the button below.
+			If you would like to save all the item data to a JSON file, click the button below.
 		</p>
-		<BlackButton parentText="Save To JSON File" parentFunction={() => saveToJsonFile()}
+		<BlackButton parentText="Download All Items" parentFunction={() => saveToJsonFile()}
 		></BlackButton>
 
 		<p class="text-white text-2xl mt-10">
@@ -77,7 +77,7 @@
 		<p class="text-white text-2xl">Sample Response</p>
 
 		<CodeBlock
-			code={JSON.stringify(data.data, null, 2)}
+			code={JSON.stringify(data.randomData, null, 2)}
 			language={'json'}
 			tailwindcss="text-xs w-2/3 mx-5"
 			isOverflow={true}
